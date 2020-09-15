@@ -1,0 +1,88 @@
+{% extends 'main_template.html' %}
+{% load static %}
+
+{% block tytul %} Koszyk {% endblock %}
+{% block strona %}
+
+
+
+
+
+
+<div class="upper-section2">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+                    <tr>
+                        <th><h54><strong>Lista zakupów:</strong></h54></th>
+                    </tr>
+
+            </div>
+             <br>
+        </div>
+
+
+                <div class="col-lg-12">
+                    <div class="box-element">
+                        {% for item in items %}
+                        <hr>
+                            <h2>{{ item.element.nazwa }}</h2>
+                        <hr>
+                         <!--   <h2>{{ item.ilosc }}</h2> --->
+                        <!--    <h2>ID {{ item.id }}</h2> --->
+                            <p>Składniki:</p>
+                            <ul id="myUL">
+
+                            {% for skladnik in item.element.skladniki.all %}
+                              <li> {{ skladnik }}</li>
+                            <br>
+                            {% endfor %}
+
+                            </ul>
+
+
+
+                            <div class="ilosc">
+                            <p class="ilosc">Porcje: {{ item.ilosc }}
+                                <i data-product="{{ item.id }}" data-action="add" class="fas fa-arrow-up update-cart"></i>
+                                <i data-product="{{ item.id }}" data-action="remove" class="fas fa-arrow-down update-cart"></i></p>
+                            </div>
+
+ {% endfor %}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div class="row">
+{% for p in przepis|dictsortreversed:"stopien_trudnosci" %}
+        <div class="col-lg-4">
+            <div class="box-element product">
+                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
+                <h1><strong>{{ p.nazwa }}</strong></h1>
+                <p>1:{{ p.opis }}</p>12
+                <p>ID :{{ p.id }}</p>
+
+                {% for skladnik in p.skladniki.all %}{{ skladnik }}
+                {% for x in skladnik.dodatkowe_set.all %}{{ x.ilosc }} {% endfor %}
+                <br>
+                {% endfor %}
+                <hr>
+                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
+                <a class="btn btn-outline-success" href="#">Szczegóły</a>
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+</div>
+<script
+
+{% endblock %}

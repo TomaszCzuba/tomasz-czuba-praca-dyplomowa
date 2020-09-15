@@ -1,0 +1,196 @@
+{% extends 'main_template.html' %}
+{% load static %}
+
+{% block tytul %} Search {% endblock %}
+{% block strona %}
+
+<style>
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.content-collaps {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  background-color: #f1f1f1;
+}
+</style>
+<script>
+$(function () {
+  $('.pr-przepis').hide();
+  $('.d2').show();
+
+  $('#select').on("change",function () {
+    $('.pr-przepis').hide();
+    $('.d'+$(this).val()).show();
+  }).val("2");
+});
+</script>
+
+<div class="upper-section2">
+<div class="container">
+<br>
+<h55>Filtr: </h55>
+<select id="select" name="dropdown" class="btn btn-secondary dropdown-toggle">
+
+<option value="1">Poziom trudnosci rosnący</option>
+<option value="2">Poziom trudnosci malejący</option>
+<option value="3">Czas przygotowania rosnący </option>
+<option value="4">Czas przygotowania malejący </option>
+</select>
+<hr>
+</div>
+<div class="container">
+<div class="pr-przepis d1">
+    <div class="row">
+{% for p in przepis|dictsort:"stopien_trudnosci" %}
+        <div class="col-lg-4">
+            <div class="box-element product">
+                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
+                <h1><strong>{{ p.nazwa }}</strong></h1>
+                <hr>
+                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
+                    <div class="content-collaps">
+                    <p>{{ p.opis }}</p>
+                    </div>
+              <!--  <p>ID :{{ p.id }}</p> --->
+                <hr>
+                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
+                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
+                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
+                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
+                {% endfor %}</p>
+                <hr>
+                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
+
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+</div>
+
+
+
+<div class="container">
+<div class="pr-przepis d2">
+    <div class="row">
+{% for p in przepis|dictsortreversed:"stopien_trudnosci" %}
+        <div class="col-lg-4">
+            <div class="box-element product">
+                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
+                <h1><strong>{{ p.nazwa }}</strong></h1>
+                <hr>
+                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
+                    <div class="content-collaps">
+                    <p>{{ p.opis }}</p>
+                    </div>
+              <!--  <p>ID :{{ p.id }}</p> --->
+                <hr>
+                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
+                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
+                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
+                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
+                {% endfor %}</p>
+                <hr>
+                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
+
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+</div>
+<div class="container">
+<div class="pr-przepis d3">
+    <div class="row">
+{% for p in przepis|dictsort:"czas_przygotowania" %}
+        <div class="col-lg-4">
+            <div class="box-element product">
+                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
+                <h1><strong>{{ p.nazwa }}</strong></h1>
+                <hr>
+                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
+                    <div class="content-collaps">
+                    <p>{{ p.opis }}</p>
+                    </div>
+              <!--  <p>ID :{{ p.id }}</p> --->
+                <hr>
+                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
+                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
+                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
+                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
+                {% endfor %}</p>
+                <hr>
+                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
+
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+</div>
+
+<div class="container">
+<div class="pr-przepis d4">
+    <div class="row">
+{% for p in przepis|dictsortreversed:"czas_przygotowania" %}
+        <div class="col-lg-4">
+            <div class="box-element product">
+                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
+                <h1><strong>{{ p.nazwa }}</strong></h1>
+                <hr>
+                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
+                    <div class="content-collaps">
+                    <p>{{ p.opis }}</p>
+                    </div>
+              <!--  <p>ID :{{ p.id }}</p> --->
+                <hr>
+                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
+                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
+                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
+                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
+                {% endfor %}</p>
+                <hr>
+                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
+
+            </div>
+        </div>
+{% endfor %}
+    </div>
+</div>
+</div>
+<br>
+    <br>
+    <br>
+</div>
+
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+}
+</script>
+{% endblock %}

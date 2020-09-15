@@ -1,0 +1,184 @@
+h50{
+    color: white;
+    font-size: 36px;
+    font-weight: 40;
+    margin: 20px;
+    text-shadow: h-shadow v-shadow blur-radius none;
+    background: #ff4a4a;
+}
+
+h51
+{
+    color: #f2f2f2;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    background: rgba(255, 74, 74, 0.8);
+}
+
+
+h52
+{
+    color: #ff4a4a;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 32px;
+    margin: 0 0 72px;
+    text-align: center;
+    background: rgba(242, 242, 242, 0.8);
+}
+
+h53
+{
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    background: black;
+}
+
+h54
+{
+    color: #7c795d;
+    font-family: 'Trocchi', serif;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0;
+}
+
+h55
+{
+    color: white;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+.testowanie
+{
+    text-align: center;
+    color: white;
+}
+
+body {
+  font-family: Helvetica;
+
+}
+.lower-section,
+.lower-section2,
+.lower-section3,
+.upper-section2,
+.upper-section {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  color: rgba(#2980b9, 0.5);
+
+  span { font-size: 2.2rem; }
+}
+.upper-section {
+  min-height: 50vh;
+  width: 100%;
+  background-image: url("/static/images/food2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+  background-attachment: fixed;
+}
+
+.upper-section2 {
+  min-height: 50vh;
+  width: 100%;
+  background-image: url("/static/images/search-background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: left top;
+  background-attachment: fixed;
+}
+
+.lower-section{
+  min-height: 50vh;
+  width: 100%;
+  background:  black;
+}
+
+
+
+.lower-section2 {
+  min-height: 50vh;
+  width: 100%;
+  background-image: url("/static/images/food2-bottom.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.lower-section3{
+  min-height: 50vh;
+  width: 100%;
+  background:  white;
+}
+
+.przepis-zdjecie{
+    width: 100%;
+    float: center;
+    height: 200px;
+    object-fit: cover;
+    border: 5px solid black;
+}
+
+.box-element{
+    box-shadow:hsl(0, 0%, 80%) 0 0 16px;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.product{
+    border-radius: 0 0 4px 4px:
+}
+
+.koszyk-row{
+    display: flex;
+    align-items: flex-stretch;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px;
+}
+
+
+/* https://www.w3schools.com/howto/howto_js_collapsible.asp */
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+
+

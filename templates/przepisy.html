@@ -1,0 +1,131 @@
+
+{% extends 'main_template.html' %}
+{% load static %}
+
+{% block tytul %} Główna {% endblock %}
+{% block strona %}
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Wire+One|Raleway:300' rel='stylesheet' type='text/css'>
+
+
+
+<div class="upper-section">
+    <div class="container">
+        <h51 >Podaj składniki,</h51> <br><h52>a my znajdziemy przepis!</h52>
+
+	<!-- autofill js script -->
+        <form method="get">
+          <script>
+              $( function() {
+                var availableTags = [
+                  {% for skladnik in skladniki %}
+                    "{{ skladnik }}",
+                  {% endfor %}
+                ];
+                function split( val ) {
+                  return val.split( /,\s*/ );
+                }
+                function extractLast( term ) {
+                  return split( term ).pop();
+                }
+                $( "#tags" )
+                  // don't navigate away from the field on tab when selecting an item
+                  .on( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                      event.preventDefault();
+                    }
+                  })
+                  .autocomplete({
+                    minLength: 0,
+                    source: function( request, response ) {
+                      // delegate back to autocomplete, but extract the last term
+                      response( $.ui.autocomplete.filter(
+                        availableTags, extractLast( request.term ) ) );
+                    },
+                    focus: function() {
+                      // prevent value inserted on focus
+                      return false;
+                    },
+                    select: function( event, ui ) {
+                      var terms = split( this.value );
+                      // remove the current input
+                      terms.pop();
+                      // add the selected item
+                      terms.push( ui.item.value );
+                      // add placeholder to get the comma-and-space at the end
+                      terms.push( "" );
+                      this.value = terms.join( ", " );
+                      return false;
+                    }
+                  });
+              } );
+          </script>
+	<!-- end js script -->
+	<!-- search button -->
+
+        <div class="ui-widget">
+	        <input class="form-control mr-sm-2" type="search" name="q" aria-label="Search" id="tags" size="50">
+		<br>
+
+            <button class="btn btn-dark" type="submit">Szukaj</button>
+
+        </form>
+        </div>
+    </div>
+</div>
+
+<div class="lower-section">
+  <span>
+
+      <section class="testowanie">
+
+          <div class="container">
+
+              <div class="row">
+
+                  <div class="col-sm-4">
+                        <h54>Wyszukiwarka <i class="fas fa-search"></i></h54>
+                      <br>
+                        <br>
+                      <p>Nie marnuj składników! Użyj wyszukiwarki, wprowadzając składniki, które Ci zostały w domu, a aplikacja znajdźie dla Ciebie przepisy.
+                        Wyświetlone przepisy możesz filtrować na wiele sposobów, więc na pewno znajdziesz coś, co zdązysz ugotować nawet w 20minut!</p>
+
+
+                  </div>
+
+                  <div class="col-sm-4">
+                    <h54>Lista zakupów <i class="fas fa-shopping-cart"></i></h54>
+                      <br>
+                    <br>
+                      <p>Dodaj przepisy do listy zakupów i kup brakujące składniki do przepisu.</p>
+
+                  </div>
+
+                  <div class="col-sm-4">
+                    <h54>Dodaj przepis <i class="fas fa-plus"></i></h54>
+                      <br>
+                    <br>
+                      <p>Jeśli chcesz się podzielić z nami swoim przepisem, proszę użyj opcji "Dodaj przepis" i rozbuduj naszą bazę danych o kolejny przepis. Dziękujemy za Twój wkład!</p>
+
+                  </div>
+
+
+
+              </div>
+
+          </div>
+
+      </section>
+
+
+  </span>
+</div>
+
+<div class="lower-section2">
+    siema
+</div>
+
+{% endblock %}

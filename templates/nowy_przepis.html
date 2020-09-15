@@ -1,0 +1,22 @@
+{% extends 'main_template.html' %}
+{% block tytul %} Dodaj przepis  {% endblock %}
+{% load bootstrap %}
+{% block strona %}
+<div class="container">
+<div class="row">
+    <div class="col-lg-4">
+
+    </div>
+    <div class="col-lg-4">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit">Dodaj przepis</button>
+
+        <a href="{% url 'przepisy'  %}">Cofnij</a>
+    </form>
+    </div>
+</div>
+</div>
+
+{% endblock %}

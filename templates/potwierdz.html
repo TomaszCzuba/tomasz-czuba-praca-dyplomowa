@@ -1,0 +1,10 @@
+{% extends 'glowny.html' %}
+{% block tytul %} Usun przepis  {% endblock %}
+{% block strona %}
+    <h1>Czy na pewno chcesz usunac "{{ przepis.nazwa }}" przepis?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Usun przepis</button>
+        <a href="{% url 'przepisy'  %}">Cofnij</a>
+    </form>
+{% endblock %}

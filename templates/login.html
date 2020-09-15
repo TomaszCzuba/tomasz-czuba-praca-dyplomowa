@@ -1,0 +1,35 @@
+{% load crispy_forms_tags %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Logowanie</title>
+</head>
+<body>
+<div class="container">
+    <div class="content-section">
+     <form method="post">
+            {% csrf_token %}
+         <label> {{ form|crispy }} </label>
+
+         <label>
+            </fieldset>
+
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Zaloguj sie</button>
+            </div>
+        </label>
+     </form>
+     <label>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">Nie posiadasz konta?</small> <a class="ml-2" href="{% url 'register' %}">Zarejestruj się</a>
+        </div>
+</body>
+</html>

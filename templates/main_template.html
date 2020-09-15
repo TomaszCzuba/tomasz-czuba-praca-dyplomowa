@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE HTML>
+	<html lang="en">
+	<head>
+		<link rel="stylesheet" href="{% static 'css/main_template.css' %}">
+  		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+  		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		<!-- font awesome / ikonki --->
+		<script src="https://kit.fontawesome.com/2e7e702f45.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+
+		<script>
+			var user = '{{request.user}}'
+
+	function getToken(name) {
+		let cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				// Does this cookie string begin with the name we want?
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+	return cookieValue;
+}
+const csrftoken = getToken('csrftoken');
+		</script>
+		</head>
+
+
+	<!-- Site Title -->
+		<title>{% block tytul %} {% endblock %}</title>
+		<!-- tło strony / gradient --->
+		<body style="background-color: black;">
+
+
+				<!-- Nav bar -->
+<div class="container">
+<nav class="navbar navbar-expand-md navbar-dark " style="background-color: black;">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+				<a class="nav-link" href="#" onclick="goBack()"><i class="fas fa-arrow-left"></i> Powrót</a>
+            </li>
+            <li class="nav-item">
+				<a class="nav-link" href="{% url 'przepisy' %}"> Strona główna <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'nowy_przepis' %}">Dodaj przepis</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+			{% if user.is_authenticated %}
+			<li class="nav-item dropdown">
+        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Profil
+        		</a>
+        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        		  <a class="dropdown-item" href="{% url 'logout' %}">Edytuj profil</a>
+         		 <a class="dropdown-item" href="{% url 'koszyk' %}">Lista zakupów <i class="fas fa-shopping-basket"></i></a>
+         	 <div class="dropdown-divider"></div>
+         		 <a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>
+       		 </div>
+      </li>
+
+
+			{% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Zaloguj</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Rejestracja</a>
+            </li>
+
+			{% endif %}
+			<li class="nav-item">
+			<a class="nav-link" href="{% url 'koszyk' %}">Lista zakupów <i class="fas fa-shopping-basket"></i></a>
+		</li>
+        </ul>
+    </div>
+</nav>
+	</div>
+<!-- KONIEC Nav bar -->
+            {% block strona %} {% endblock %}
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="{% static 'JavaScript/cart.js' %}"></script>
+	<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+	</body>
+</html>

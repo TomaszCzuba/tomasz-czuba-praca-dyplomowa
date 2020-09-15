@@ -1,1 +1,0 @@
-# tomasz-czuba-praca-dyplomowa

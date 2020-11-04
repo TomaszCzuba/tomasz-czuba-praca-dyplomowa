@@ -1,0 +1,25 @@
+{% extends 'main_template.html' %}
+{% load static %}
+
+{% block tytul %} Wszystkie przepisy {% endblock %}
+
+{% block strona %}
+<br>
+    <div class="container">
+        {% for w in wszystkie %}
+        <div class="box-element product">
+            <div class="row">
+                <div class="col-lg-8">
+                        {{ w.nazwa }} <br> <hr>
+                        {{ w.opis }} <br> <br>
+                          <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Zobacz więcej</button>
+                </div>
+                <div class="col-lg-4">
+                    <img src=/media/{{w.zdjecie}} class="przepis-wszystkie-zdjecie">
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+{% endblock strona %}

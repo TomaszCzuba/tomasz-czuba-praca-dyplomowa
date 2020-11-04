@@ -1,3 +1,3 @@
-web: gunicorn praca.wsgi --log-file - --log-level debug
+web: gunicorn praca.wsgi --log-file -
 python manage.py collectstatic --noinput
 manage.py migrate

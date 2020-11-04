@@ -11,9 +11,8 @@ import json
 
 
 def przepisy(request):
-    # return HttpResponse("<h1>To jest nasz pierwszy test</h1>")
-    # test = "To jest cos we views"
     skladniki = list(Skladniki.objects.all())  # lista wszystkich skladnikow, do autouzupelniania
+    skladniki = Skladniki.objects.order_by('nazwa')
     wszystkie = Przepis.objects.all()
     try:
         q = request.GET.get('q')
@@ -24,7 +23,10 @@ def przepisy(request):
         y = [n.replace(', ', " ") for n in z] # zamiana przecinka i spacji na sama spacje
         m = ' '.join(y) # laczenie elementow w stringa i rozdzielenie ich spacja
         u = list(m.split(" ")) # rozdzielenie stringow oraz utworzenie z nich listy
-        del u[-1]
+        print(u)
+        if '' in u:
+            del u[-1]
+
         for x in u:
             przepis = Przepis.objects.filter(skladniki__nazwa__contains=x)
         zawartosc = przepis.order_by('-stopien_trudnosci')
@@ -79,8 +81,12 @@ def search(request):
     template_name = 'search.html'
     return render(request, template_name)
 
-def koszyk(request):
+def wszystkie(request):
+    wszystkie = Przepis.objects.all()
+    template_name = 'wszystkie.html'
+    return render(request, template_name, {'wszystkie': wszystkie})
 
+def koszyk(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Zakupy.objects.get_or_create(klient=customer, zakonczone=False)

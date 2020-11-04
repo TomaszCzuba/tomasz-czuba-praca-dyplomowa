@@ -38,7 +38,7 @@ $(function () {
 </script>
 
 <div class="upper-section2">
-<div class="container">
+
 <br>
 <h55>Filtr: </h55>
 <select id="select" name="dropdown" class="btn btn-secondary dropdown-toggle">
@@ -49,32 +49,43 @@ $(function () {
 <option value="4">Czas przygotowania malejący </option>
 </select>
 <hr>
-</div>
+
+
 <div class="container">
 <div class="pr-przepis d1">
-    <div class="row">
 {% for p in przepis|dictsort:"stopien_trudnosci" %}
-        <div class="col-lg-4">
-            <div class="box-element product">
-                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
-                <h1><strong>{{ p.nazwa }}</strong></h1>
+         <div class="box-element product">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><strong>{{ p.nazwa }}</strong></h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                        {{ p.krotki_opis }} <br> <br>
+                        <button type="button" class="collapsible">Pokaż skladniki  <i class="fas fa-chevron-down"></i></button>
+                            <div class="content-collaps">
+                                {{ p.skladniki_ilosc|linebreaks }}
+                            </div> <br>
+                        Poziom trudności: {{ p.stopien_trudnosci }} / 10 <br> <br>
+                        Czas przygotowania: {{ p.czas_przygotowania }} min <br>
+                </div>
+                <div class="col-lg-4">
+                    <img src=/media/{{p.zdjecie}} class="przepis-wszystkie-zdjecie">
+                </div>
+            </div>
                 <hr>
-                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
-                    <div class="content-collaps">
-                    <p>{{ p.opis }}</p>
-                    </div>
-              <!--  <p>ID :{{ p.id }}</p> --->
-                <hr>
-                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
-                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
-                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
-                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
-                {% endfor %}</p>
-                <hr>
-                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
-
+            <div class="row">
+                <div class="col-lg-8">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj składniki do listy zakupów</button>
+                </div>
+                <div class="col-lg-4">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Zobacz więcej</button>
+                </div>
             </div>
         </div>
+        <br>
 {% endfor %}
     </div>
 </div>
@@ -84,58 +95,81 @@ $(function () {
 
 <div class="container">
 <div class="pr-przepis d2">
-    <div class="row">
-{% for p in przepis|dictsortreversed:"stopien_trudnosci" %}
-        <div class="col-lg-4">
-            <div class="box-element product">
-                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
-                <h1><strong>{{ p.nazwa }}</strong></h1>
-                <hr>
-                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
-                    <div class="content-collaps">
-                    <p>{{ p.opis }}</p>
-                    </div>
-              <!--  <p>ID :{{ p.id }}</p> --->
-                <hr>
-                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
-                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
-                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
-                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
-                {% endfor %}</p>
-                <hr>
-                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
 
+{% for p in przepis|dictsortreversed:"stopien_trudnosci" %}
+    <div class="box-element product">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><strong>{{ p.nazwa }}</strong></h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                        {{ p.krotki_opis }} <br> <br>
+                        <button type="button" class="collapsible">Pokaż skladniki  <i class="fas fa-chevron-down"></i></button>
+                            <div class="content-collaps">
+                                {{ p.skladniki_ilosc|linebreaks }}
+                            </div> <br>
+                        Poziom trudności: {{ p.stopien_trudnosci }} / 10 <br> <br>
+                        Czas przygotowania: {{ p.czas_przygotowania }} min <br>
+                </div>
+                <div class="col-lg-4">
+                    <img src=/media/{{p.zdjecie}} class="przepis-wszystkie-zdjecie">
+                </div>
+            </div>
+                <hr>
+            <div class="row">
+                <div class="col-lg-8">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj składniki do listy zakupów</button>
+                </div>
+                <div class="col-lg-4">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Zobacz więcej</button>
+                </div>
             </div>
         </div>
+        <br>
 {% endfor %}
     </div>
 </div>
 </div>
+
 <div class="container">
 <div class="pr-przepis d3">
     <div class="row">
 {% for p in przepis|dictsort:"czas_przygotowania" %}
-        <div class="col-lg-4">
-            <div class="box-element product">
-                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
-                <h1><strong>{{ p.nazwa }}</strong></h1>
+        <div class="box-element product">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><strong>{{ p.nazwa }}</strong></h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                        {{ p.krotki_opis }} <br> <br>
+                        <button type="button" class="collapsible">Pokaż skladniki  <i class="fas fa-chevron-down"></i></button>
+                            <div class="content-collaps">
+                                {{ p.skladniki_ilosc|linebreaks }}
+                            </div> <br>
+                        Poziom trudności: {{ p.stopien_trudnosci }} / 10 <br> <br>
+                        Czas przygotowania: {{ p.czas_przygotowania }} min <br>
+                </div>
+                <div class="col-lg-4">
+                    <img src=/media/{{p.zdjecie}} class="przepis-wszystkie-zdjecie">
+                </div>
+            </div>
                 <hr>
-                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
-                    <div class="content-collaps">
-                    <p>{{ p.opis }}</p>
-                    </div>
-              <!--  <p>ID :{{ p.id }}</p> --->
-                <hr>
-                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
-                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
-                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
-                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
-                {% endfor %}</p>
-                <hr>
-                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
-
+            <div class="row">
+                <div class="col-lg-8">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj składniki do listy zakupów</button>
+                </div>
+                <div class="col-lg-4">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Zobacz więcej</button>
+                </div>
             </div>
         </div>
+        <br>
 {% endfor %}
     </div>
 </div>
@@ -145,27 +179,38 @@ $(function () {
 <div class="pr-przepis d4">
     <div class="row">
 {% for p in przepis|dictsortreversed:"czas_przygotowania" %}
-        <div class="col-lg-4">
-            <div class="box-element product">
-                <p><img src=/media/{{p.zdjecie}} class="przepis-zdjecie"></p>
-                <h1><strong>{{ p.nazwa }}</strong></h1>
+        <div class="box-element product">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1><strong>{{ p.nazwa }}</strong></h1>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                        {{ p.krotki_opis }} <br> <br>
+                        <button type="button" class="collapsible">Pokaż skladniki  <i class="fas fa-chevron-down"></i></button>
+                            <div class="content-collaps">
+                                {{ p.skladniki_ilosc|linebreaks }}
+                            </div> <br>
+                        Poziom trudności: {{ p.stopien_trudnosci }} / 10 <br> <br>
+                        Czas przygotowania: {{ p.czas_przygotowania }} min <br>
+                </div>
+                <div class="col-lg-4">
+                    <img src=/media/{{p.zdjecie}} class="przepis-wszystkie-zdjecie">
+                </div>
+            </div>
                 <hr>
-                <button type="button" class="collapsible">Pokaż opis <i class="fas fa-chevron-down"></i></button>
-                    <div class="content-collaps">
-                    <p>{{ p.opis }}</p>
-                    </div>
-              <!--  <p>ID :{{ p.id }}</p> --->
-                <hr>
-                <p>Czas przygotowania: {{ p.czas_przygotowania }}</p>
-                <p>Poziom trudności: {{ p.stopien_trudnosci }} / 10</p>
-                <p>Składniki: {% for skladnik in p.skladniki.all %}{{ skladnik }},
-                {% for x in skladnik.dodatkowe.all %}{{ x.ilosc }} {% endfor %}
-                {% endfor %}</p>
-                <hr>
-                <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj do listy zakupów</button>
-
+            <div class="row">
+                <div class="col-lg-8">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Dodaj składniki do listy zakupów</button>
+                </div>
+                <div class="col-lg-4">
+                    <button data-product="{{ p.id }}" data-action="add" class="btn btn-outline-secondary add-btn update-cart" id="element">Zobacz więcej</button>
+                </div>
             </div>
         </div>
+        <br>
 {% endfor %}
     </div>
 </div>

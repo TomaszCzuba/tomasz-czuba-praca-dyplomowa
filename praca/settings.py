@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a68*%(%v8h2!pr$lpoorqd%(-wyf!b3c2@1dk6+nc=&r&y4&f-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1","tomasz-czuba-praca-dyplomowa.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -45,14 +46,12 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'praca.urls'
@@ -123,11 +122,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-
 STATIC_URL = '/static/'
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'pracaDyplomowaAplikacja\static')
+STATICFILES_DIRS = ['pliki_static', 'pracaDyplomowaAplikacja\static']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'pliki_media'

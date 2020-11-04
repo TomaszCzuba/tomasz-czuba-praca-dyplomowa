@@ -16,7 +16,7 @@
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
 
 		<script>
-			var user = '{{request.user}}'
+	var user = '{{request.user}}'
 
 	function getToken(name) {
 		let cookieValue = null;
@@ -34,83 +34,83 @@
 	return cookieValue;
 }
 const csrftoken = getToken('csrftoken');
-		</script>
-		</head>
+</script>
+	</head>
 
-
-	<!-- Site Title -->
+		<!-- Tytul strony -->
 		<title>{% block tytul %} {% endblock %}</title>
-		<!-- tło strony / gradient --->
-		<body style="background-color: black;">
+
+	<body>
+			<!-- Nav bar -->
+			<div class="container-fluid">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+					<div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active">
+								<a class="nav-link" href="#" onclick="goBack()"><i class="fas fa-arrow-left"></i> Powrót</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'przepisy' %}"> Strona główna <span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'nowy_przepis' %}">Dodaj przepis</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'wszystkie' %}">Wszystkie przepisy</a>
+							</li>
 
 
-				<!-- Nav bar -->
-<div class="container">
-<nav class="navbar navbar-expand-md navbar-dark " style="background-color: black;">
-    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-				<a class="nav-link" href="#" onclick="goBack()"><i class="fas fa-arrow-left"></i> Powrót</a>
-            </li>
-            <li class="nav-item">
-				<a class="nav-link" href="{% url 'przepisy' %}"> Strona główna <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'nowy_przepis' %}">Dodaj przepis</a>
-            </li>
+						</ul>
+					</div>
+
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+
+					<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+						<ul class="navbar-nav ml-auto">
+							{% if user.is_authenticated %}
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						  Profil
+								</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="{% url 'logout' %}">Edytuj profil</a>
+								 <a class="dropdown-item" href="{% url 'koszyk' %}">Lista zakupów <i class="fas fa-shopping-basket"></i></a>
+							 <div class="dropdown-divider"></div>
+								 <a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>
+							 </div>
+					  </li>
 
 
-        </ul>
-    </div>
+							{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'login' %}">Zaloguj</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'register' %}">Rejestracja</a>
+							</li>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+							{% endif %}
+							<li class="nav-item">
+							<a class="nav-link" href="{% url 'koszyk' %}">Lista zakupów <i class="fas fa-shopping-basket"></i></a>
+						</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
 
-    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul class="navbar-nav ml-auto">
-			{% if user.is_authenticated %}
-			<li class="nav-item dropdown">
-        		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Profil
-        		</a>
-        	<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        		  <a class="dropdown-item" href="{% url 'logout' %}">Edytuj profil</a>
-         		 <a class="dropdown-item" href="{% url 'koszyk' %}">Lista zakupów <i class="fas fa-shopping-basket"></i></a>
-         	 <div class="dropdown-divider"></div>
-         		 <a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>
-       		 </div>
-      </li>
-
-
-			{% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Zaloguj</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}">Rejestracja</a>
-            </li>
-
-			{% endif %}
-			<li class="nav-item">
-			<a class="nav-link" href="{% url 'koszyk' %}">Lista zakupów <i class="fas fa-shopping-basket"></i></a>
-		</li>
-        </ul>
-    </div>
-</nav>
-	</div>
-<!-- KONIEC Nav bar -->
             {% block strona %} {% endblock %}
 
 
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="{% static 'JavaScript/cart.js' %}"></script>
-	<script>
-function goBack() {
-  window.history.back();
-}
-</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="{% static 'JavaScript/cart.js' %}"></script>
+		<script>
+	function goBack() {
+	  window.history.back();
+	}
+	</script>
 	</body>
 </html>

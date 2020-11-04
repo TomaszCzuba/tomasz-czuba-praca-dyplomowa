@@ -1,4 +1,5 @@
-h50{
+h50
+{
     color: white;
     font-size: 36px;
     font-weight: 40;
@@ -65,21 +66,22 @@ h55
     text-align: center;
 }
 
-.testowanie
+.tekst-strona-glowna
 {
     text-align: center;
-    color: white;
+    color:black;
 }
 
 body {
   font-family: Helvetica;
-
+  background-color: hsl(0, 0%, 98%);
 }
-.lower-section,
-.lower-section2,
-.lower-section3,
-.upper-section2,
-.upper-section {
+
+.dolna-sekcja,
+.dolna-sekcja2,
+.dolna-sekcja3,
+.gorna-sekcja2,
+.gorna-sekcja {
   display: grid;
   justify-content: center;
   align-items: center;
@@ -87,7 +89,7 @@ body {
 
   span { font-size: 2.2rem; }
 }
-.upper-section {
+.gorna-sekcja {
   min-height: 50vh;
   width: 100%;
   background-image: url("/static/images/food2.jpg");
@@ -97,7 +99,7 @@ body {
   background-attachment: fixed;
 }
 
-.upper-section2 {
+.gorna-sekcja2 {
   min-height: 50vh;
   width: 100%;
   background-image: url("/static/images/search-background.jpg");
@@ -107,15 +109,13 @@ body {
   background-attachment: fixed;
 }
 
-.lower-section{
+.dolna-sekcja{
   min-height: 50vh;
   width: 100%;
-  background:  black;
+  background:  #grey;
 }
 
-
-
-.lower-section2 {
+.dolna-sekcja2 {
   min-height: 50vh;
   width: 100%;
   background-image: url("/static/images/food2-bottom.jpg");
@@ -125,13 +125,21 @@ body {
   background-attachment: fixed;
 }
 
-.lower-section3{
+.dolna-sekcja3{
   min-height: 50vh;
   width: 100%;
   background:  white;
 }
 
 .przepis-zdjecie{
+    width: 100%;
+    float: center;
+    height: 200px;
+    object-fit: cover;
+    border: 5px solid black;
+}
+
+.przepis-wszystkie-zdjecie{
     width: 100%;
     float: center;
     height: 200px;
@@ -158,9 +166,8 @@ body {
     border-bottom: 1px;
 }
 
+/* Stylizacja przycisku do rozwijania */
 
-/* https://www.w3schools.com/howto/howto_js_collapsible.asp */
-/* Style the button that is used to open and close the collapsible content */
 .collapsible {
   background-color: #eee;
   color: #444;
@@ -173,7 +180,7 @@ body {
   font-size: 15px;
 }
 
-/* Style the collapsible content. Note: hidden by default */
+/* Stylizacja wygladu informacji w rozwijanym menu */
 .content {
   padding: 0 18px;
   display: none;
@@ -181,4 +188,6 @@ body {
   background-color: #f1f1f1;
 }
 
-
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
+	margin-top: 10px;
+}

@@ -1,13 +1,14 @@
 {% extends 'main_template.html' %}
+{% load static %}
 {% block tytul %} Dodaj przepis  {% endblock %}
 {% load bootstrap %}
 {% block strona %}
 <div class="container">
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-12">
 
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-12">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|bootstrap }}

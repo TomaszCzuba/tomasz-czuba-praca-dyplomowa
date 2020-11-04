@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from decouple import config
 from dj_database_url import parse as dburl
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,11 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'a68*%(%v8h2!pr$lpoorqd%(-wyf!b3c2@1dk6+nc=&r&y4&f-'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ["127.0.0.1","tomasz-czuba-praca-dyplomowa.herokuapp.com"]
 
@@ -79,12 +78,9 @@ WSGI_APPLICATION = 'praca.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+DATABASES = { 'default': config('DATABASE_URL', default=default_dburl, case=dburl), }
+
 
 
 # Password validation

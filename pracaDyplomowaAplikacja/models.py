@@ -35,7 +35,6 @@ class Przepis(models.Model):
     edytowane = models.DateField(auto_now=True,editable=False)
     czas_przygotowania = models.DurationField(default=0, blank=True)
     stopien_trudnosci = models.DecimalField(max_digits=4, decimal_places=2)
-    zweryfikowany = models.BooleanField(default=False)
     #relacja z modelem Skladniki
     skladniki = models.ManyToManyField(Skladniki, through='Dodatkowe')
 
